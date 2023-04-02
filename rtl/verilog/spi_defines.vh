@@ -102,11 +102,15 @@
 // Number of device select signals. Use SPI_SS_NB for fine tuning the 
 // exact number.
 //
-`define SPI_SS_NB_8
+define SPI_SS_NB_1
+//`define SPI_SS_NB_8
 //`define SPI_SS_NB_16
 //`define SPI_SS_NB_24
 //`define SPI_SS_NB_32
 
+`ifdef SPI_SS_NB_1
+  `define SPI_SS_NB             1    // Can be set 1
+`endif
 `ifdef SPI_SS_NB_8
   `define SPI_SS_NB             8    // Can be set from 1 to 8
 `endif
@@ -123,7 +127,8 @@
 //
 // Bits of WISHBONE address used for partial decoding of SPI registers.
 //
-`define SPI_OFS_BITS	          4:2
+`define SPI_OFS_BITS_MSB	      4
+`define SPI_OFS_BITS_LSB        2
 
 //
 // Register offset
@@ -148,6 +153,8 @@
 //
 // Control register bit position
 //
+`define SPI_CARD_PRESENT        15
+`define SPI_CARP_REMOVED        14
 `define SPI_CTRL_ASS            13
 `define SPI_CTRL_IE             12
 `define SPI_CTRL_LSB            11
@@ -155,5 +162,5 @@
 `define SPI_CTRL_RX_NEGEDGE     9
 `define SPI_CTRL_GO             8
 `define SPI_CTRL_RES_1          7
-`define SPI_CTRL_CHAR_LEN       6:0
-
+`define SPI_CTRL_CHAR_LEN_MSB   6
+`define SPI_CTRL_CHAR_LEN_LSB   0
